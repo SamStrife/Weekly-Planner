@@ -1,7 +1,9 @@
 <template>
   <the-header></the-header>
-  <member-list></member-list>
-  <week-view></week-view>
+  <div id="page" class="d-flex p-2 bd-highlight">
+    <member-list></member-list>
+    <week-view></week-view>
+  </div>
 </template>
 
 <script>

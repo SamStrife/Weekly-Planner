@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 
 import MembersModule from './modules/members/index.js';
-import WeekModule from './modules/week/index.js';
+import WeekModule from './modules/weeks/index.js';
 
 const store = createStore({
   modules: {
