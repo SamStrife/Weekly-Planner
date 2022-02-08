@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1>Weekly Team Planner</h1>
-    <base-button id="login">Log In</base-button>
+    <base-button id="login" icon="login">Log In</base-button>
   </header>
 </template>
 

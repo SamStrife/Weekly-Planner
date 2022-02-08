@@ -5,18 +5,7 @@ import getters from './getters.js';
 export default {
   state() {
     return {
-      members: [
-        {
-          id: 1,
-          firstName: 'Sam',
-          lastName: 'Fletcher',
-        },
-        {
-          id: 2,
-          firstName: 'Steve',
-          lastName: 'Johnson',
-        },
-      ],
+      members: [],
     };
   },
   mutations,

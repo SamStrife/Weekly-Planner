@@ -1,28 +1,18 @@
 <template>
-  <ul class="list-group">
-    <li
-      class="list-group-item"
-      aria-current="true"
-      v-for="member in members"
-      :key="member.id"
-    >
-      {{ member }}
-    </li>
-  </ul>
+  <ui-list>
+    <ui-item v-for="member in members" :key="member.id">
+      <ui-item-text-content>{{ member }}</ui-item-text-content>
+    </ui-item>
+  </ui-list>
 </template>
 
-<script>
+<script setup>
 import { useStore } from 'vuex';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
-export default {
-  setup() {
-    const store = useStore();
-    const members = computed(() => store.getters.members);
-
-    return { members };
-  },
-};
+const store = useStore();
+store.dispatch('getMembers');
+const members = computed(() => store.getters.members);
 </script>
 
 <style scoped></style>
