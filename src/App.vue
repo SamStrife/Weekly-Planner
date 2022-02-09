@@ -34,8 +34,4 @@ export default {
   display: flex;
   gap: 10px;
 }
-
-.weekview {
-  align-items: center;
-}
 </style>
