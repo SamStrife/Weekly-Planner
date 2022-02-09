@@ -16,7 +16,7 @@ app.component('base-button', BaseButton);
 app.component('base-container', BaseContainer);
 
 app.use(store);
-app.use(BalmUI);
+app.use(BalmUI, { $theme: { primary: '#388e3c' } });
 app.use(BalmUIPlus);
 
 app.mount('#app');
