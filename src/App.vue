@@ -1,7 +1,7 @@
 <template>
   <the-header></the-header>
-  <div id="page" class="d-flex p-2 bd-highlight">
-    <member-list></member-list>
+  <div id="page" class="main">
+    <member-list class="list"></member-list>
     <week-view></week-view>
   </div>
 </template>
@@ -25,5 +25,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.main {
+  display: flex;
+  gap: 10px;
 }
 </style>
