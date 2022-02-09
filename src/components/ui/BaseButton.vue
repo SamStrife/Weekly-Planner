@@ -1,5 +1,5 @@
 <template>
-  <ui-button raised :icon="icon">
+  <ui-button raised :icon="icon" color="#ffff">
     <slot></slot>
   </ui-button>
 </template>

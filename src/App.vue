@@ -1,18 +1,21 @@
 <template>
-  <the-header></the-header>
-  <div id="page" class="main">
-    <member-list class="list"></member-list>
-    <week-view></week-view>
+  <div>
+    <the-header></the-header>
+    <div class="main">
+      <member-list class="list"></member-list>
+      <week-view class="weekview"></week-view>
+    </div>
   </div>
 </template>
 
 <script>
 import TheHeader from './components/layout/TheHeader.vue';
 import MemberList from './components/members/MemberList.vue';
+import BaseContainer from './components/ui/BaseContainer.vue';
 import WeekView from './components/week/WeekView.vue';
 
 export default {
-  components: { TheHeader, MemberList, WeekView },
+  components: { TheHeader, MemberList, WeekView, BaseContainer },
   setup() {},
 };
 </script>
@@ -24,11 +27,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0px;
 }
 
 .main {
   display: flex;
   gap: 10px;
+}
+
+.weekview {
+  align-items: center;
 }
 </style>
