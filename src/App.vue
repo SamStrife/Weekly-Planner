@@ -14,9 +14,13 @@ import MemberList from './components/members/MemberList.vue';
 import BaseContainer from './components/ui/BaseContainer.vue';
 import WeekView from './components/week/WeekView.vue';
 
+import dayjs from 'dayjs';
+
 export default {
   components: { TheHeader, MemberList, WeekView, BaseContainer },
-  setup() {},
+  setup() {
+    console.log(dayjs());
+  },
 };
 </script>
 
