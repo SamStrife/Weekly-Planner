@@ -5,13 +5,11 @@ export default {
       .toFormat('dd MMM yyyy');
     commit('setStartOfWeek', startOfWeek);
   },
-  offsetWeek({ commit, state, context }) {
-    console.log(`Context: ${context}`);
-    let newStartOfWeek = state.selectedWeek
+  offsetWeek({ commit, state }, offset) {
+    const newStartOfWeek = state.selectedWeek
       .startOf('week')
-      .plus({ weeks: context })
+      .plus({ weeks: offset })
       .toFormat('dd MMM yyyy');
     commit('setStartOfWeek', newStartOfWeek);
-    console.log(`New Start Of Week: ${newStartOfWeek}`);
   },
 };
