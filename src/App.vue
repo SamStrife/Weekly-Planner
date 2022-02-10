@@ -14,12 +14,12 @@ import MemberList from './components/members/MemberList.vue';
 import BaseContainer from './components/ui/BaseContainer.vue';
 import WeekView from './components/week/WeekView.vue';
 
-import dayjs from 'dayjs';
+import { DateTime } from 'luxon';
 
 export default {
   components: { TheHeader, MemberList, WeekView, BaseContainer },
   setup() {
-    console.log(dayjs());
+    console.log(DateTime.now());
   },
 };
 </script>
