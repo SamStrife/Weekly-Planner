@@ -1,9 +1,15 @@
 <template>
   <div class="page" v-shadow="2">
     <div class="selector" v-shadow="1">
-      <base-button icon="keyboard_arrow_left"></base-button>
+      <base-button
+        icon="keyboard_arrow_left"
+        @click="changeWeek('subtract')"
+      ></base-button>
       <h1>Week Commencing: {{ startOfWeek }}</h1>
-      <base-button icon="keyboard_arrow_right"></base-button>
+      <base-button
+        icon="keyboard_arrow_right"
+        @click="changeWeek('add')"
+      ></base-button>
     </div>
     <div class="calendar" v-shadow="1">Calendar</div>
     <div class="under">
@@ -23,15 +29,16 @@ import { computed, ref } from 'vue';
 
 const store = useStore();
 store.dispatch('getStartOfWeek');
+
+//Get Current Week
 const startOfWeek = computed(() => store.getters.startOfWeek);
 
+//Change Week
 const weekOffset = ref(0);
-console.log(weekOffset.value);
-
 function changeWeek(mode) {
   if (mode === 'add') weekOffset.value++;
   if (mode === 'subtract') weekOffset.value--;
-  console.log(weekOffset.value);
+  store.dispatch('offsetWeek', weekOffset.value);
 }
 </script>
 
