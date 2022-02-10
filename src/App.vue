@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <the-header></the-header>
     <div class="main">
       <member-list class="list"></member-list>
@@ -36,8 +36,18 @@ $primary: #6200ee;
   margin-top: 0px;
 }
 
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+the-header {
+  flex-grow: 1;
+}
+
 .main {
   display: flex;
   gap: 10px;
+  flex-grow: 1;
 }
 </style>
