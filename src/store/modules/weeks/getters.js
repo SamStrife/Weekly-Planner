@@ -1,1 +1,5 @@
-export default {};
+export default {
+  startOfWeek(state) {
+    return state.startOfWeek;
+  },
+};
