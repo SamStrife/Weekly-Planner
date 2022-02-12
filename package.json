@@ -9,6 +9,7 @@
   "dependencies": {
     "@fullcalendar/core": "^5.10.1",
     "@popperjs/core": "^2.11.2",
+    "@toast-ui/vue-calendar": "^1.1.1",
     "balm-ui": "^9.41.1",
     "firebase": "^9.6.6",
     "luxon": "^2.3.0",
