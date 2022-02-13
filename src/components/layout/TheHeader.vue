@@ -1,7 +1,7 @@
 <template>
   <header v-shadow="2">
     <h1>Weekly Team Planner</h1>
-    <base-button icon="login" v-if="!isLoggedIn()">Log In</base-button>
+    <base-button icon="login" v-if="!activeUser">Log In</base-button>
     <ui-chip v-else>Logged in as: {{ activeUser }}</ui-chip>
   </header>
 </template>
@@ -9,18 +9,15 @@
 <script setup>
 import BaseButton from '../ui/BaseButton.vue';
 import { useStore } from 'vuex';
-import { ref, computed } from 'vue';
-import { getDocs, query, where } from 'firebase/firestore';
-import { membersCol } from '../../firebase';
+import { computed } from 'vue';
 
 const store = useStore();
 
-const activeUser = computed(() => store.getters.activeUser);
-
-const isLoggedIn = function () {
-  if (!activeUser.value) return false;
-};
-console.log(isLoggedIn());
+const activeUser = computed(() => {
+  const user = store.getters.activeUser;
+  if (!user) return false;
+  return `${user.firstName} ${user.lastName}`;
+});
 </script>
 
 <style scoped>

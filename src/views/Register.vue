@@ -34,14 +34,17 @@ const register = () => {
     .then((data) => {
       console.log('Successfully Registered!');
       uid.value = data.user.uid;
-    })
-    .then(() => {
       setDoc(doc(membersCol, uid.value), {
         firstName: firstName.value,
         lastName: lastName.value,
         email: email.value,
       });
-      store.dispatch('getActiveUser', uid.value);
+      store.dispatch('getActiveUser', {
+        id: uid.value,
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value,
+      });
       router.replace('/');
     })
     .catch((error) => {
