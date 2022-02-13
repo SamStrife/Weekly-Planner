@@ -10,17 +10,16 @@
 import BaseButton from '../ui/BaseButton.vue';
 import { useStore } from 'vuex';
 import { ref, computed } from 'vue';
+import { getDocs, query, where } from 'firebase/firestore';
+import { membersCol } from '../../firebase';
 
 const store = useStore();
 
 const activeUser = computed(() => store.getters.activeUser);
-console.log(activeUser.value);
 
 const isLoggedIn = function () {
-  if (activeUser.value) return true;
   if (!activeUser.value) return false;
 };
-
 console.log(isLoggedIn());
 </script>
 

@@ -11,14 +11,7 @@
         @click="changeWeek('add')"
       ></base-button>
     </div>
-    <div class="cal" v-shadow="1">
-      <!-- <calendar
-        style="height: 650px"
-        :taskView="false"
-        :scheduleView="['time']"
-        :week="{ workweek: true, hourStart: 7, hourEnd: 18, startDayOfWeek: 1 }"
-      /> -->
-    </div>
+    <div class="cal" v-shadow="1"></div>
     <div class="under">
       <div class="considerations" v-shadow="1">
         <ui-table fullwidth>Considerations</ui-table>
