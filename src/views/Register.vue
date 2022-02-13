@@ -11,12 +11,10 @@
 
 <script setup>
 import { ref } from 'vue';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  addDoc,
-  membersCol,
-} from '../firebase.js';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { membersCol } from '../firebase';
+
 import { useRouter } from 'vue-router';
 import BaseButton from '../components/ui/BaseButton.vue';
 
@@ -26,17 +24,25 @@ const firstName = ref('');
 const lastName = ref('');
 const email = ref('');
 const password = ref('');
+const uid = ref('');
 
 const register = () => {
   createUserWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((data) => {
       console.log('Successfully Registered!');
     })
+    .then(() => {
+      setDoc(doc(membersCol, uid.value), {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email.value,
+      });
+      router.replace('/');
+    })
     .catch((error) => {
       console.log(error.code);
       alert(error.message);
     });
-  router.replace('/');
 };
 </script>
 

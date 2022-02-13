@@ -14,10 +14,9 @@
     <div class="cal" v-shadow="1">
       <calendar
         style="height: 650px"
-        :view="week"
         :taskView="false"
         :scheduleView="['time']"
-        :week="{ workweek: true, hourStart: 7, hourEnd: 18 }"
+        :week="{ workweek: true, hourStart: 7, hourEnd: 18, startDayOfWeek: 1 }"
       />
     </div>
     <div class="under">
@@ -34,8 +33,8 @@
 <script setup>
 import { useStore } from 'vuex';
 import { computed, ref } from 'vue';
-import Calendar from '@toast-ui/vue-calendar/src/Calendar.vue';
 import 'tui-calendar/dist/tui-calendar.css';
+import Calendar from '@toast-ui/vue-calendar/src/Calendar.vue';
 
 const store = useStore();
 store.dispatch('getStartOfWeek');

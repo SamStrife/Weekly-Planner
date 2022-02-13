@@ -29,13 +29,4 @@ async function getMembers() {
   return membersList;
 }
 
-export {
-  getMembers,
-  getAuth,
-  createUserWithEmailAndPassword,
-  membersCol,
-  doc,
-  setDoc,
-  collection,
-  addDoc,
-};
+export { getMembers, membersCol };
