@@ -1,7 +1,7 @@
 <template>
   <header v-shadow="2">
     <h1>Weekly Team Planner</h1>
-    <base-button id="login" icon="login">Log In</base-button>
+    <base-button icon="login">Log In</base-button>
   </header>
 </template>
 

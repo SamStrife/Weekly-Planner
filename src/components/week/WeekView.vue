@@ -12,7 +12,7 @@
       ></base-button>
     </div>
     <div class="cal" v-shadow="1">
-      <Calendar
+      <calendar
         style="height: 650px"
         :view="week"
         :taskView="false"

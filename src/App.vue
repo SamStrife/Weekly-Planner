@@ -1,23 +1,10 @@
 <template>
-  <div class="app">
-    <the-header></the-header>
-    <div class="main">
-      <member-list class="list"></member-list>
-      <week-view class="weekview"></week-view>
-    </div>
-  </div>
+  <the-header></the-header>
+  <router-view></router-view>
 </template>
 
-<script>
+<script setup>
 import TheHeader from './components/layout/TheHeader.vue';
-import MemberList from './components/members/MemberList.vue';
-import BaseContainer from './components/ui/BaseContainer.vue';
-import WeekView from './components/week/WeekView.vue';
-
-export default {
-  components: { TheHeader, MemberList, WeekView, BaseContainer },
-  setup() {},
-};
 </script>
 
 <style>
@@ -28,20 +15,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 0px;
-}
-
-.app {
-  display: flex;
-  flex-direction: column;
-}
-
-the-header {
-  flex-grow: 1;
-}
-
-.main {
-  display: flex;
-  gap: 10px;
-  flex-grow: 1;
 }
 </style>

@@ -1,5 +1,13 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  setDoc,
+  addDoc,
+} from 'firebase/firestore';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAvdT9aaKuDqo62PiEN1bifrtG-VcIik_4',
@@ -21,4 +29,13 @@ async function getMembers() {
   return membersList;
 }
 
-export { getMembers };
+export {
+  getMembers,
+  getAuth,
+  createUserWithEmailAndPassword,
+  membersCol,
+  doc,
+  setDoc,
+  collection,
+  addDoc,
+};
