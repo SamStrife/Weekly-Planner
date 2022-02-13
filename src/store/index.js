@@ -15,6 +15,22 @@ const store = createStore({
       activeUser: null,
     };
   },
+  actions: {
+    getActiveUser({ commit }, userID) {
+      const activeUser = userID;
+      commit('setActiveUser', activeUser);
+    },
+  },
+  getters: {
+    activeUser(state) {
+      return state.activeUser;
+    },
+  },
+  mutations: {
+    setActiveUser(state, activeUser) {
+      state.activeUser = activeUser;
+    },
+  },
 });
 
 export default store;

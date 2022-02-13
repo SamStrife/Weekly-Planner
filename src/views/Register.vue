@@ -15,10 +15,13 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { membersCol } from '../firebase';
 
+import { useStore } from 'vuex';
+
 import { useRouter } from 'vue-router';
 import BaseButton from '../components/ui/BaseButton.vue';
 
 const router = useRouter();
+const store = useStore();
 
 const firstName = ref('');
 const lastName = ref('');
@@ -30,6 +33,7 @@ const register = () => {
   createUserWithEmailAndPassword(getAuth(), email.value, password.value)
     .then((data) => {
       console.log('Successfully Registered!');
+      uid.value = data.user.uid;
     })
     .then(() => {
       setDoc(doc(membersCol, uid.value), {
@@ -37,6 +41,7 @@ const register = () => {
         lastName: lastName.value,
         email: email.value,
       });
+      store.dispatch('getActiveUser', uid.value);
       router.replace('/');
     })
     .catch((error) => {
