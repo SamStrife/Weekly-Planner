@@ -1,6 +1,8 @@
 <template>
   <header v-shadow="2">
-    <h1>Weekly Team Planner</h1>
+    <router-link style="text-decoration: none; color: inherit" to="/"
+      ><h1>Weekly Team Planner</h1></router-link
+    >
     <base-button icon="login" v-if="!activeUser">Log In</base-button>
     <ui-chip v-else>Logged in as: {{ activeUser }}</ui-chip>
   </header>
