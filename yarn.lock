@@ -383,6 +383,31 @@
     preact "^10.0.5"
     tslib "^2.1.0"
 
+"@fullcalendar/daygrid@~5.10.1":
+  version "5.10.1"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/daygrid/-/daygrid-5.10.1.tgz#bdee4f58364fdab631b2abf8b56094ab5776f203"
+  integrity sha512-sfUMP+rew0krsBffgNcWWKhBCiyytGfRKZJoc64E8ohX7VWjPcPZuB1xgO5U4wPLmNkT0rZiHoGeQGTXw1+ZKg==
+  dependencies:
+    "@fullcalendar/common" "~5.10.1"
+    tslib "^2.1.0"
+
+"@fullcalendar/luxon@^5.10.1":
+  version "5.10.1"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/luxon/-/luxon-5.10.1.tgz#1ad8300c6cbbb467574c96980a69ba46730bde24"
+  integrity sha512-THmIytaHo2SFb1lUQ8hhkZjNgt9dmIpioGEuuIj4ETDS3pHFVHMTcV22vBFC74f6kc/OA2Vwfj3+5JHltKjD/g==
+  dependencies:
+    "@fullcalendar/common" "~5.10.1"
+    tslib "^2.1.0"
+
+"@fullcalendar/timegrid@^5.10.1":
+  version "5.10.1"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/timegrid/-/timegrid-5.10.1.tgz#fa7feb909bf599eac1466b9e70c0d56ce0d1aefc"
+  integrity sha512-0O0m+JzFBlg8gxYr/rIjZViRlbndCtjZlDjjIylQHFBeWC32e3cpHEavKGbTIBLN8SDilUYAJnE21abSqC2G/w==
+  dependencies:
+    "@fullcalendar/common" "~5.10.1"
+    "@fullcalendar/daygrid" "~5.10.1"
+    tslib "^2.1.0"
+
 "@fullcalendar/vue3@^5.10.1":
   version "5.10.1"
   resolved "https://registry.yarnpkg.com/@fullcalendar/vue3/-/vue3-5.10.1.tgz#b34adcaf7837256a5aa9240592a0d97b55eb675d"
