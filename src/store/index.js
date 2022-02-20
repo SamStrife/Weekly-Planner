@@ -16,8 +16,12 @@ const store = createStore({
     };
   },
   actions: {
-    getActiveUser({ commit }, userID) {
-      const activeUser = userID;
+    getActiveUser({ commit }, user) {
+      const activeUser = user;
+      commit('setActiveUser', activeUser);
+    },
+    logOutUser({ commit }) {
+      const activeUser = null;
       commit('setActiveUser', activeUser);
     },
   },

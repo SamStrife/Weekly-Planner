@@ -4,33 +4,34 @@
       <h1>Create an account</h1>
       <ui-form-field>
         <ui-textfield
-          type="text"
+          outlined
           placeholder="First Name"
-          :required="true"
-          v-model="firstName"
+          required
+          v-model.trim="firstName"
         ></ui-textfield>
       </ui-form-field>
       <ui-form-field>
         <ui-textfield
-          type="text"
+          outlined
           placeholder="Last Name"
-          :required="true"
-          v-model="lastName"
+          required
+          v-model.trim="lastName"
         ></ui-textfield>
       </ui-form-field>
       <ui-form-field>
         <ui-textfield
-          type="text"
+          outlined
           placeholder="Email Address"
-          :required="true"
-          v-model="email"
+          required
+          v-model.trim="email"
         ></ui-textfield>
       </ui-form-field>
       <ui-form-field>
         <ui-textfield
-          type="password"
+          outlined
+          input-type="password"
           placeholder="Password"
-          :required="true"
+          required
           v-model="password"
         ></ui-textfield>
       </ui-form-field>
@@ -50,7 +51,6 @@ import { membersCol } from '../firebase';
 import { useStore } from 'vuex';
 
 import { useRouter } from 'vue-router';
-import BaseButton from '../components/ui/BaseButton.vue';
 
 const router = useRouter();
 const store = useStore();
@@ -67,6 +67,7 @@ const register = () => {
       console.log('Successfully Registered!');
       uid.value = data.user.uid;
       setDoc(doc(membersCol, uid.value), {
+        uid: uid.value,
         firstName: firstName.value,
         lastName: lastName.value,
         email: email.value,

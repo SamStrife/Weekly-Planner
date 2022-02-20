@@ -3,8 +3,13 @@
     <router-link style="text-decoration: none; color: inherit" to="/"
       ><h1>Weekly Team Planner</h1></router-link
     >
-    <base-button icon="login" v-if="!activeUser">Log In</base-button>
-    <ui-chip v-else>Logged in as: {{ activeUser }}</ui-chip>
+    <router-link
+      v-if="!activeUser"
+      style="text-decoration: none; color: inherit"
+      to="/login"
+      ><base-button icon="login" v-if="!activeUser">Log In</base-button>
+    </router-link>
+    <ui-chip v-else @click="logout">Logged in as: {{ activeUser }}</ui-chip>
   </header>
 </template>
 
@@ -12,6 +17,7 @@
 import BaseButton from '../ui/BaseButton.vue';
 import { useStore } from 'vuex';
 import { computed } from 'vue';
+import { getAuth, signOut } from 'firebase/auth';
 
 const store = useStore();
 
@@ -20,6 +26,16 @@ const activeUser = computed(() => {
   if (!user) return false;
   return `${user.firstName} ${user.lastName}`;
 });
+
+function logout() {
+  signOut(getAuth())
+    .then(() => {
+      store.dispatch('logOutUser');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 </script>
 
 <style scoped>
@@ -34,5 +50,10 @@ header {
 
 p {
   color: black;
+}
+
+router-link {
+  text-decoration: none;
+  color: inherit;
 }
 </style>
