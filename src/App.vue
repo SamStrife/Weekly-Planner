@@ -26,14 +26,16 @@ onAuthStateChanged(getAuth(), (user) => {
           lastName: docSnap.data().lastName,
           email: docSnap.data().email,
         });
+        store.dispatch('getSelectedUser', uid);
+        console.log(`Selected user: ${uid}`);
       } else {
-        // doc.data() will be undefined in this case
         console.log('No such document!');
+        console.log(`Selected user: ${uid}`);
       }
     }
     getUser();
   } else {
-    console.log('Signed Out');
+    console.log('No Logged In User');
   }
 });
 </script>

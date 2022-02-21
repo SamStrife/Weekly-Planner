@@ -13,26 +13,36 @@ const store = createStore({
   state() {
     return {
       activeUser: null,
+      selectedUser: null,
     };
   },
   actions: {
     getActiveUser({ commit }, user) {
-      const activeUser = user;
-      commit('setActiveUser', activeUser);
+      commit('setActiveUser', user);
     },
     logOutUser({ commit }) {
       const activeUser = null;
       commit('setActiveUser', activeUser);
+      commit('setSelectedUser', null);
+    },
+    getSelectedUser({ commit }, userID) {
+      commit('setSelectedUser', userID);
     },
   },
   getters: {
     activeUser(state) {
       return state.activeUser;
     },
+    selectedUser(state) {
+      return state.selectedUser;
+    },
   },
   mutations: {
     setActiveUser(state, activeUser) {
       state.activeUser = activeUser;
+    },
+    setSelectedUser(state, selectedUser) {
+      state.selectedUser = selectedUser;
     },
   },
 });
