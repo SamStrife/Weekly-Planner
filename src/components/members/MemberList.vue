@@ -5,6 +5,7 @@
         v-for="member in members"
         :key="member.uid"
         @click="selectUser(member.uid)"
+        :selected="member.uid === selectedUser ? true : false"
       >
         <ui-item-text-content
           >{{ member.firstName }} {{ member.lastName }}</ui-item-text-content
@@ -24,8 +25,8 @@ const members = computed(() => store.getters.members);
 
 function selectUser(id) {
   store.dispatch('getSelectedUser', id);
-  console.log(`Selected User: ${id}`);
 }
+const selectedUser = computed(() => store.getters.selectedUser);
 </script>
 
 <style scoped></style>
