@@ -11,7 +11,9 @@
         @click="changeWeek('add')"
       ></base-button>
     </div>
-    <div class="cal" v-shadow="1"></div>
+    <div class="cal" v-shadow="1">
+      <Fullcalendar></Fullcalendar>
+    </div>
     <div class="under">
       <div class="considerations" v-shadow="1">
         <ui-table fullwidth>Considerations</ui-table>
@@ -26,8 +28,7 @@
 <script setup>
 import { useStore } from 'vuex';
 import { computed, ref } from 'vue';
-// import 'tui-calendar/dist/tui-calendar.css';
-// import Calendar from '@toast-ui/vue-calendar/src/Calendar.vue';
+import Fullcalendar from '../week/Calendar.vue';
 
 const store = useStore();
 store.dispatch('getStartOfWeek');
