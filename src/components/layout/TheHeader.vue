@@ -9,7 +9,9 @@
       to="/login"
       ><base-button icon="login" v-if="!activeUser">Log In</base-button>
     </router-link>
-    <ui-chip v-else @click="logout">Logged in as: {{ activeUser }}</ui-chip>
+    <ui-chip v-else @click="logout" :selected="true"
+      >Logged in as: {{ activeUser }}</ui-chip
+    >
   </header>
 </template>
 
@@ -28,13 +30,18 @@ const activeUser = computed(() => {
 });
 
 function logout() {
-  signOut(getAuth())
-    .then(() => {
-      store.dispatch('logOutUser');
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  const confirmation = confirm('Are you sure you want to log out?');
+  if (!!confirmation) {
+    signOut(getAuth())
+      .then(() => {
+        store.dispatch('logOutUser');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  } else {
+    return null;
+  }
 }
 </script>
 

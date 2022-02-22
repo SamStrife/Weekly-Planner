@@ -15,8 +15,6 @@ import WeekView from '../components/week/WeekView.vue';
 <style>
 .page {
   display: flex;
-  flex-grow: 1;
-  height: 90vh;
 }
 
 .main {
@@ -30,6 +28,6 @@ import WeekView from '../components/week/WeekView.vue';
 }
 
 .list {
-  width: 15rem;
+  width: 20rem;
 }
 </style>
