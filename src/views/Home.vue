@@ -1,5 +1,5 @@
 <template>
-  <base-container>
+  <base-container class="page">
     <div class="main">
       <member-list class="list"></member-list>
       <week-view class="weekview"></week-view>
@@ -13,6 +13,12 @@ import WeekView from '../components/week/WeekView.vue';
 </script>
 
 <style>
+.page {
+  display: flex;
+  flex-grow: 1;
+  height: 90vh;
+}
+
 .main {
   display: flex;
   gap: 10px;
