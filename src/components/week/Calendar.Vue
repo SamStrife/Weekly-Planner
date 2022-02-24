@@ -9,9 +9,10 @@ import timeGrid from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { useStore } from 'vuex';
 import { ref, computed } from 'vue';
-import LoginVue from '../../views/Login.vue';
-
 const store = useStore();
+
+const userID = computed(() => store.getters.selectedUser);
+console.log(`Calendar selected user: ${userID.value}`);
 
 const eventsImport = [
   {
@@ -38,10 +39,9 @@ const eventsImport = [
   },
 ];
 
-const userID = computed(() => store.state('selectedUser'));
-console.log(`Calendar selected user: ${userID}`);
-
-const filteredEvents = eventsImport.filter((event) => event.userID === userID);
+const filteredEvents = eventsImport.filter(
+  (event) => event.userID === userID.value
+);
 
 const calendarOptions = {
   plugins: [timeGrid, interactionPlugin],
