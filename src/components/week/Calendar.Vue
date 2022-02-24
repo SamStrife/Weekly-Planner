@@ -17,5 +17,13 @@ const calendarOptions = {
   locale: 'en-GB',
   contentHeight: 'auto',
   height: 'auto',
+  editable: true,
+  events: [
+    {
+      title: 'Test2',
+      start: '2022-02-24T13:30:00',
+      end: '2022-02-24T16:30:00',
+    },
+  ],
 };
 </script>
