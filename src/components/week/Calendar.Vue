@@ -18,11 +18,18 @@ const calendarOptions = {
   contentHeight: 'auto',
   height: 'auto',
   editable: true,
+  eventStartEditable: true,
+  selectable: true,
   events: [
     {
+      userID: '',
+      type: '',
       title: 'Test2',
       start: '2022-02-24T13:30:00',
       end: '2022-02-24T16:30:00',
+      classNames: [],
+      backgroundColor: '#1b5e20',
+      borderColor: '#111',
     },
   ],
 };
