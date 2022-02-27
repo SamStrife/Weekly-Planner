@@ -8,40 +8,18 @@ import FullCalendar from '@fullcalendar/vue3';
 import timeGrid from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { useStore } from 'vuex';
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
+
 const store = useStore();
 
-const userID = computed(() => store.getters.selectedUser);
-console.log(`Calendar selected user: ${userID.value}`);
+const selectedUser = computed(() => store.getters.selectedUser);
+// console.log(`Calendar selected user: ${selectedUser.value}`);
 
-const eventsImport = [
-  {
-    id: 1,
-    userID: 'PFriETPF6nOQfmrJfzmzCqUPd3J2',
-    type: '',
-    title: "Test's event",
-    start: '2022-02-24T13:30:00',
-    end: '2022-02-24T16:30:00',
-    classNames: [],
-    backgroundColor: '#1b5e20',
-    borderColor: '#111',
-  },
-  {
-    id: 2,
-    userID: 'bzMdKRSkJdU1DCVISlQT63BIAxY2',
-    type: '',
-    title: "Sam's event",
-    start: '2022-02-23T08:30:00',
-    end: '2022-02-23T11:30:00',
-    classNames: [],
-    backgroundColor: '#1b5e20',
-    borderColor: '#111',
-  },
-];
+const events = computed(() => store.getters.events);
 
-const filteredEvents = eventsImport.filter(
-  (event) => event.userID === userID.value
-);
+// const filteredEvents = events.filter(
+//   (event) => event.userID === 'bzMdKRSkJdU1DCVISlQT63BIAxY2'
+// );
 
 const calendarOptions = {
   plugins: [timeGrid, interactionPlugin],
@@ -55,6 +33,6 @@ const calendarOptions = {
   editable: true,
   eventStartEditable: true,
   selectable: true,
-  events: filteredEvents,
+  events: events,
 };
 </script>

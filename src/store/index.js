@@ -1,14 +1,12 @@
 import { createStore } from 'vuex';
 
 import MembersModule from './modules/members/index.js';
-import WeekModule from './modules/weeks/index.js';
-import AuthModule from './modules/auth/index.js';
+import EventsModule from './modules/events/index.js';
 
 const store = createStore({
   modules: {
     members: MembersModule,
-    week: WeekModule,
-    auth: AuthModule,
+    events: EventsModule,
   },
   state() {
     return {

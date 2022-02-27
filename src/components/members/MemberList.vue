@@ -23,10 +23,12 @@ const store = useStore();
 store.dispatch('getMembers');
 const members = computed(() => store.getters.members);
 
+const selectedUser = computed(() => store.getters.selectedUser);
+
 function selectUser(id) {
   store.dispatch('getSelectedUser', id);
+  console.log(`Memebrs List Selected user: ${selectedUser.value}`);
 }
-const selectedUser = computed(() => store.getters.selectedUser);
 </script>
 
 <style scoped></style>

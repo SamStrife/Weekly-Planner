@@ -35,7 +35,7 @@ onAuthStateChanged(getAuth(), (user) => {
     }
     getUser();
   } else {
-    console.log('No Logged In User');
+    //
   }
 });
 </script>

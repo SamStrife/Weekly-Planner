@@ -14,6 +14,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const membersCol = collection(db, 'members');
+const eventsCol = collection(db, 'events');
 
 async function getMembers() {
   const membersSnap = await getDocs(membersCol);
@@ -21,4 +22,10 @@ async function getMembers() {
   return membersList;
 }
 
-export { getMembers, membersCol, db };
+async function getEvents() {
+  const eventsSnap = await getDocs(eventsCol);
+  const eventsList = eventsSnap.docs.map((doc) => doc.data());
+  return eventsList;
+}
+
+export { getMembers, getEvents, membersCol, db };
