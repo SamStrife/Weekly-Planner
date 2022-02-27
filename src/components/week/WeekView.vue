@@ -15,11 +15,7 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex';
 import Fullcalendar from '../week/Calendar.vue';
-
-const store = useStore();
-store.dispatch('getStartOfWeek');
 </script>
 
 <style scoped>

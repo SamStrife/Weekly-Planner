@@ -11,7 +11,7 @@ import { useStore } from 'vuex';
 import { computed } from 'vue';
 
 const store = useStore();
-
+store.dispatch('getEvents');
 const selectedUser = computed(() => store.getters.selectedUser);
 // console.log(`Calendar selected user: ${selectedUser.value}`);
 
