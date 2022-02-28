@@ -15,7 +15,15 @@ store.dispatch('getEvents');
 const selectedUser = computed(() => store.getters.selectedUser);
 // console.log(`Calendar selected user: ${selectedUser.value}`);
 
-const events = computed(() => store.getters.events);
+const eventsImport = computed(() => store.getters.events);
+console.log(`Events Import: ${eventsImport}`);
+const events = [];
+function importEvents(eventsImport) {
+  for (const event in eventsImport) {
+    events.push(event);
+  }
+}
+importEvents(eventsImport);
 
 // const filteredEvents = events.filter(
 //   (event) => event.userID === 'bzMdKRSkJdU1DCVISlQT63BIAxY2'
