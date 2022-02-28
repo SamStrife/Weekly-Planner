@@ -18,6 +18,11 @@ const selectedUser = computed(() => store.getters.selectedUser);
 
 const eventsImport = computed(() => store.getters.events);
 console.log(eventsImport);
+const events = [];
+for (const event in eventsImport) {
+  events.push({ event });
+}
+console.log(events);
 
 // const filteredEvents = events.filter(
 //   (event) => event.userID === 'bzMdKRSkJdU1DCVISlQT63BIAxY2'
