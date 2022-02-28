@@ -30,7 +30,7 @@ const eventsImport = computed(() => store.getters.events);
 console.log(eventsImport);
 const events = [];
 
-eventsImport.value.forEach((event) => events.push({ event }));
+eventsImport.value.forEach((event) => events.push(event));
 
 console.log(events);
 
