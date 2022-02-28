@@ -1,5 +1,5 @@
 <template>
-  <p v-for="event in eventsImport">{{ event.title }}</p>
+  <p v-for="event in eventsImport">{{ event }}</p>
   <FullCalendar :options="calendarOptions" />
 </template>
 
@@ -17,14 +17,7 @@ const selectedUser = computed(() => store.getters.selectedUser);
 // console.log(`Calendar selected user: ${selectedUser.value}`);
 
 const eventsImport = computed(() => store.getters.events);
-console.log(`Events Import: ${eventsImport}`);
-const events = [];
-// function importEvents(eventsImport) {
-//   for (const event in eventsImport) {
-//     events.push(event);
-//   }
-// }
-// importEvents(eventsImport);
+console.log(eventsImport);
 
 // const filteredEvents = events.filter(
 //   (event) => event.userID === 'bzMdKRSkJdU1DCVISlQT63BIAxY2'
@@ -42,6 +35,6 @@ const calendarOptions = {
   editable: true,
   eventStartEditable: true,
   selectable: true,
-  events: events,
+  events: eventsImport,
 };
 </script>
