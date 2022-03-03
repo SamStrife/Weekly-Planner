@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import '@fullcalendar/core/vdom'; // solves problem with Vite
 import FullCalendar from '@fullcalendar/vue3';
 import timeGrid from '@fullcalendar/timegrid';
@@ -23,30 +23,35 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { useStore } from 'vuex';
 import { computed } from 'vue';
 
-const store = useStore();
-store.dispatch('getEvents');
+export default {
+  components: { FullCalendar },
+  setup() {
+    const store = useStore();
+    store.dispatch('getEvents');
 
-const eventsImport = computed(() => store.getters.events);
-console.log(eventsImport);
-const events = [];
+    const eventsImport = computed(() => store.getters.events);
+    console.log(eventsImport);
 
-eventsImport.value.forEach((event) => events.push(event));
+    const events = [];
+    eventsImport.value.forEach((event) => events.push(event));
+    console.log(events);
 
-console.log(events);
-
-const calendarOptions = {
-  plugins: [timeGrid, interactionPlugin],
-  initialView: 'timeGridWeek',
-  slotMinTime: '07:00:00',
-  slotMaxTime: '18:00:00',
-  weekends: false,
-  locale: 'en-GB',
-  contentHeight: 'auto',
-  height: 'auto',
-  editable: true,
-  eventStartEditable: true,
-  selectable: true,
-  events: eventsImport,
+    const calendarOptions = {
+      plugins: [timeGrid, interactionPlugin],
+      initialView: 'timeGridWeek',
+      slotMinTime: '07:00:00',
+      slotMaxTime: '18:00:00',
+      weekends: false,
+      locale: 'en-GB',
+      contentHeight: 'auto',
+      height: 'auto',
+      editable: true,
+      eventStartEditable: true,
+      selectable: true,
+      events: events,
+    };
+    return { calendarOptions, eventsImport };
+  },
 };
 </script>
 
