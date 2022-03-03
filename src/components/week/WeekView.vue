@@ -1,7 +1,7 @@
 <template>
   <div class="page" v-shadow="2">
     <div class="cal" v-shadow="1">
-      <p v-for="event in eventsImport">{{ event }}</p>
+      <p v-for="event in events">{{ event }}</p>
       <FullCalendar :options="calendarOptions" />
     </div>
     <div class="under">
@@ -20,20 +20,18 @@ import '@fullcalendar/core/vdom'; // solves problem with Vite
 import FullCalendar from '@fullcalendar/vue3';
 import timeGrid from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { useStore } from 'vuex';
-import { computed } from 'vue';
+import { getEvents } from '../../firebase';
+import { ref } from 'vue';
 
 export default {
   components: { FullCalendar },
   setup() {
-    const store = useStore();
-    store.dispatch('getEvents');
+    const events = ref([]);
 
-    const eventsImport = computed(() => store.getters.events);
-    console.log(eventsImport);
+    const eventsImport = await getEvents().then(
+      eventsImport.forEach((event) => events.push(event))
+    );
 
-    const events = [];
-    eventsImport.value.forEach((event) => events.push(event));
     console.log(events);
 
     const calendarOptions = {
@@ -50,7 +48,7 @@ export default {
       selectable: true,
       events: events,
     };
-    return { calendarOptions, eventsImport };
+    return { calendarOptions, getEvents, events };
   },
 };
 </script>
