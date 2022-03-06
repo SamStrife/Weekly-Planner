@@ -1,7 +1,6 @@
 <template>
   <div class="page" v-shadow="2">
     <div class="cal" v-shadow="1">
-      <p v-for="event in events">{{ event }}</p>
       <FullCalendar :options="calendarOptions" />
     </div>
     <div class="under">
@@ -21,18 +20,29 @@ import FullCalendar from '@fullcalendar/vue3';
 import timeGrid from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { getEvents } from '../../firebase';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { useStore } from 'vuex';
 
 export default {
   components: { FullCalendar },
   setup() {
+    const store = useStore();
     const events = ref([]);
 
-    const eventsImport = await getEvents().then(
-      eventsImport.forEach((event) => events.push(event))
+    const selectedUser = store.getters.selectedUser;
+
+    watch(
+      () => store.selectedUser,
+      (user, prevUser) => {
+        if (user !== prevUser) {
+          selectedUser = user;
+        }
+      }
     );
 
-    console.log(events);
+    getEvents().then((response) =>
+      response.forEach((event) => events.value.push(event))
+    );
 
     const calendarOptions = {
       plugins: [timeGrid, interactionPlugin],
@@ -46,7 +56,7 @@ export default {
       editable: true,
       eventStartEditable: true,
       selectable: true,
-      events: events,
+      events: events.value,
     };
     return { calendarOptions, getEvents, events };
   },
