@@ -1,14 +1,19 @@
 <template>
-  <div class="page" v-shadow="2">
-    <div class="cal" v-shadow="1">
-      <FullCalendar :options="calendarOptions" />
+  <div>
+    <div>
+      <NewEventDialog @close="toggleDialog" :show="dialogOpen"></NewEventDialog>
     </div>
-    <div class="under">
-      <div class="considerations" v-shadow="1">
-        <ui-table fullwidth>Considerations</ui-table>
+    <div class="page" v-shadow="2">
+      <div class="cal" v-shadow="1">
+        <FullCalendar :options="calendarOptions" />
       </div>
-      <div class="completions" v-shadow="1">
-        <ui-table fullwidth>Completions</ui-table>
+      <div class="under">
+        <div class="considerations" v-shadow="1">
+          <ui-table fullwidth>Considerations</ui-table>
+        </div>
+        <div class="completions" v-shadow="1">
+          <ui-table fullwidth>Completions</ui-table>
+        </div>
       </div>
     </div>
   </div>
@@ -22,9 +27,10 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { getEvents } from '../../firebase';
 import { ref, watch } from 'vue';
 import { useStore } from 'vuex';
+import NewEventDialog from './NewEventDialog.vue';
 
 export default {
-  components: { FullCalendar },
+  components: { FullCalendar, NewEventDialog },
   setup() {
     const store = useStore();
     const events = ref([]);
@@ -39,6 +45,9 @@ export default {
         }
       }
     );
+
+    const dialogOpen = ref(true);
+    const toggleDialog = () => (dialogOpen.value = !dialogOpen.value);
 
     getEvents().then((response) =>
       response.forEach((event) => events.value.push(event))
@@ -58,7 +67,7 @@ export default {
       selectable: true,
       events: events.value,
     };
-    return { calendarOptions, getEvents, events };
+    return { calendarOptions, getEvents, events, dialogOpen, toggleDialog };
   },
 };
 </script>
