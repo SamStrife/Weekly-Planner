@@ -70,6 +70,9 @@ export default {
         alert('selected ' + info.startStr + ' to ' + info.endStr);
         dialogOpen.value = true;
       },
+      eventClick: function (info) {
+        alert('Event: ' + info.event.title);
+      },
     };
     return { calendarOptions, getEvents, events, dialogOpen, toggleDialog };
   },
