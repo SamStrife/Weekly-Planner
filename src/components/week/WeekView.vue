@@ -46,7 +46,7 @@ export default {
       }
     );
 
-    const dialogOpen = ref(true);
+    const dialogOpen = ref(false);
     const toggleDialog = () => (dialogOpen.value = !dialogOpen.value);
 
     getEvents().then((response) =>
@@ -66,6 +66,10 @@ export default {
       eventStartEditable: true,
       selectable: true,
       events: events.value,
+      select: function (info) {
+        alert('selected ' + info.startStr + ' to ' + info.endStr);
+        dialogOpen.value = true;
+      },
     };
     return { calendarOptions, getEvents, events, dialogOpen, toggleDialog };
   },
