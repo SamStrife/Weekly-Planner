@@ -1,8 +1,13 @@
 <template>
   <div>
-    <div>
-      <NewEventDialog @close="toggleDialog" :show="dialogOpen"></NewEventDialog>
-    </div>
+    <Teleport to="body">
+      <div>
+        <NewEventDialog
+          @close="toggleDialog"
+          :show="dialogOpen"
+        ></NewEventDialog>
+      </div>
+    </Teleport>
     <div class="page" v-shadow="2">
       <div class="cal" v-shadow="1">
         <FullCalendar :options="calendarOptions" />

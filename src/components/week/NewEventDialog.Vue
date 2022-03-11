@@ -5,45 +5,52 @@
       <header>
         <h2>New Event</h2>
       </header>
-      <section>
-        <p>Event Name</p>
-        <ui-textfield v-model="eventName" :required="true">
-          Event Name
-        </ui-textfield>
-        <p>Event Name</p>
-        <ui-select
-          :v-model="eventType"
-          :required="true"
-          :options="eventTypeOptions"
-        >
-          Event Type
-        </ui-select>
-        <p>Start Time</p>
-        <ui-datepicker
-          v-model="startTime"
-          :config="{ enableTime: true, dateFormat: 'd-m-Y H:i' }"
-          placeholder="Start Date/Time.."
-        ></ui-datepicker>
-        <p>End Time</p>
-        <ui-datepicker
-          v-model="endTime"
-          :config="{ enableTime: true, dateFormat: 'd-m-Y H:i' }"
-          placeholder="End Date/Time.."
-        ></ui-datepicker>
-        <p>Event Description</p>
-        <ui-textfield
-          input-type="textarea"
-          rows="8"
-          cols="40"
-          v-model="eventDescription"
-        >
-          Event Description
-        </ui-textfield>
-      </section>
-      <menu>
-        <base-button @click="submit">Submit</base-button>
-        <base-button @click="close">Cancel</base-button>
-      </menu>
+      <ui-form class="conditions-form" nowrap action-align="center">
+        <ui-grid>
+          <ui-grid-cell>
+            <ui-form-field :class="[itemClass, 'required']">
+              <label>Event Name</label>
+              <ui-textfield v-model="eventName" :required="true"></ui-textfield>
+            </ui-form-field>
+          </ui-grid-cell>
+          <ui-grid-cell>
+            <ui-form-field :class="itemClass">
+              <label>Event Type</label>
+              <ui-select
+                :v-model="eventType"
+                :required="true"
+                :options="eventTypeOptions"
+              >
+                Event Type
+              </ui-select>
+            </ui-form-field>
+          </ui-grid-cell>
+          <ui-grid-cell>
+            <ui-form-field :class="itemClass">
+              <label>Start Time</label>
+              <ui-datepicker
+                v-model="startTime"
+                :config="{ enableTime: true, dateFormat: 'd-m-Y H:i' }"
+                placeholder="Start Date/Time.."
+              ></ui-datepicker>
+            </ui-form-field>
+          </ui-grid-cell>
+          <ui-grid-cell>
+            <ui-form-field :class="itemClass">
+              <label>End Time</label>
+              <ui-datepicker
+                v-model="endTime"
+                :config="{ enableTime: true, dateFormat: 'd-m-Y H:i' }"
+                placeholder="End Date/Time.."
+              ></ui-datepicker>
+            </ui-form-field>
+          </ui-grid-cell>
+        </ui-grid>
+        <ui-form-field :class="actionClass">
+          <base-button @click="submit">Submit</base-button>
+          <base-button @click="close">Cancel</base-button>
+        </ui-form-field>
+      </ui-form>
     </dialog>
   </div>
 </template>
@@ -55,7 +62,6 @@ const eventName = ref('');
 const eventType = ref('');
 const startTime = ref('');
 const endTime = ref('');
-const eventDescription = ref('');
 const eventTypeOptions = [
   {
     label: 'Task',
@@ -87,7 +93,7 @@ const submit = () => {
   event type: ${eventType.value}
   start time: ${startTime.value}
   end time: ${endTime.value}
-  event description: ${eventDescription.value}
+
   `);
   emit('close');
 };
