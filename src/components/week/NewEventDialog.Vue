@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="show" class="backdrop"></div>
-    <dialog open v-if="show">
+    <div v-if="show" class="backdrop" @keydown.esc="close" tabindex="0"></div>
+    <dialog open v-if="show" @keydown.esc="close" tabindex="0">
       <header>
         <h2>New Event</h2>
       </header>
