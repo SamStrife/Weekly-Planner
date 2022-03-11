@@ -27,9 +27,18 @@
         <p>End Time</p>
         <ui-datepicker
           v-model="endTime"
-          :config="{ mode: 'time' }"
-          placeholder="End Time.."
+          :config="{ enableTime: true, dateFormat: 'd-m-Y H:i' }"
+          placeholder="End Date/Time.."
         ></ui-datepicker>
+        <p>Event Description</p>
+        <ui-textfield
+          input-type="textarea"
+          rows="8"
+          cols="40"
+          v-model="eventDescription"
+        >
+          Event Description
+        </ui-textfield>
       </section>
       <menu>
         <base-button @click="submit">Submit</base-button>
@@ -40,13 +49,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 const eventName = ref('');
 const eventType = ref('');
 const startTime = ref('');
 const endTime = ref('');
-
+const eventDescription = ref('');
 const eventTypeOptions = [
   {
     label: 'Task',
@@ -78,6 +87,7 @@ const submit = () => {
   event type: ${eventType.value}
   start time: ${startTime.value}
   end time: ${endTime.value}
+  event description: ${eventDescription.value}
   `);
   emit('close');
 };
