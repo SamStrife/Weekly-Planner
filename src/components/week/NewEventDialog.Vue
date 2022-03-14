@@ -8,13 +8,13 @@
       <ui-form class="conditions-form" nowrap action-align="center">
         <ui-grid>
           <ui-grid-cell>
-            <ui-form-field :class="[itemClass, 'required']">
+            <ui-form-field :class="['required']">
               <label>Event Name</label>
               <ui-textfield v-model="eventName" :required="true"></ui-textfield>
             </ui-form-field>
           </ui-grid-cell>
           <ui-grid-cell>
-            <ui-form-field :class="itemClass">
+            <ui-form-field>
               <label>Event Type</label>
               <ui-select
                 :v-model="eventType"
@@ -26,27 +26,30 @@
             </ui-form-field>
           </ui-grid-cell>
           <ui-grid-cell>
-            <ui-form-field :class="itemClass">
+            <ui-form-field>
               <label>Start Time</label>
               <ui-datepicker
                 v-model="startTime"
                 :config="{ enableTime: true, dateFormat: 'd-m-Y H:i' }"
                 placeholder="Start Date/Time.."
-              ></ui-datepicker>
+              >
+                {{ props.eventStart }}</ui-datepicker
+              >
             </ui-form-field>
           </ui-grid-cell>
           <ui-grid-cell>
-            <ui-form-field :class="itemClass">
+            <ui-form-field>
               <label>End Time</label>
               <ui-datepicker
                 v-model="endTime"
                 :config="{ enableTime: true, dateFormat: 'd-m-Y H:i' }"
                 placeholder="End Date/Time.."
-              ></ui-datepicker>
+                >{{ props.eventEnd }}</ui-datepicker
+              >
             </ui-form-field>
           </ui-grid-cell>
         </ui-grid>
-        <ui-form-field :class="actionClass">
+        <ui-form-field>
           <base-button @click="submit">Submit</base-button>
           <base-button @click="close">Cancel</base-button>
         </ui-form-field>
@@ -79,6 +82,8 @@ const eventTypeOptions = [
 
 const props = defineProps({
   show: { type: Boolean, required: true },
+  eventStart: { type: String, required: false, default: '' },
+  eventEnd: { type: String, required: false, default: '' },
 });
 
 const emit = defineEmits(['close']);

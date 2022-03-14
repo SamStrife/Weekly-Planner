@@ -5,6 +5,8 @@
         <NewEventDialog
           @close="toggleDialog"
           :show="dialogOpen"
+          :event-start="newEventStart"
+          :event-end="newEventEnd"
         ></NewEventDialog>
       </div>
     </Teleport>
@@ -29,6 +31,7 @@ import '@fullcalendar/core/vdom'; // solves problem with Vite
 import FullCalendar from '@fullcalendar/vue3';
 import timeGrid from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import luxonPlugin from '@fullcalendar/luxon';
 import { getEvents } from '../../firebase';
 import { ref, watch } from 'vue';
 import { useStore } from 'vuex';
@@ -58,8 +61,11 @@ export default {
       response.forEach((event) => events.value.push(event))
     );
 
+    const newEventStart = ref('');
+    const newEventEnd = ref('');
+
     const calendarOptions = {
-      plugins: [timeGrid, interactionPlugin],
+      plugins: [timeGrid, interactionPlugin, luxonPlugin],
       initialView: 'timeGridWeek',
       slotMinTime: '07:00:00',
       slotMaxTime: '18:00:00',
@@ -73,13 +79,23 @@ export default {
       events: events.value,
       select: function (info) {
         alert('selected ' + info.startStr + ' to ' + info.endStr);
+        newEventStart.value = info.startStr;
+        newEventEnd.value = info.endStr;
         dialogOpen.value = true;
       },
       eventClick: function (info) {
         alert('Event: ' + info.event.title);
       },
     };
-    return { calendarOptions, getEvents, events, dialogOpen, toggleDialog };
+    return {
+      calendarOptions,
+      getEvents,
+      events,
+      dialogOpen,
+      toggleDialog,
+      newEventStart,
+      newEventEnd,
+    };
   },
 };
 </script>
