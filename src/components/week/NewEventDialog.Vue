@@ -33,7 +33,7 @@
                 :config="{ enableTime: true, dateFormat: 'd-m-Y H:i' }"
                 placeholder="Start Date/Time.."
               >
-                {{ props.eventStart }}</ui-datepicker
+                {{ eventStart }}</ui-datepicker
               >
             </ui-form-field>
           </ui-grid-cell>
@@ -44,7 +44,7 @@
                 v-model="endTime"
                 :config="{ enableTime: true, dateFormat: 'd-m-Y H:i' }"
                 placeholder="End Date/Time.."
-                >{{ props.eventEnd }}</ui-datepicker
+                >{{ eventEnd }}</ui-datepicker
               >
             </ui-form-field>
           </ui-grid-cell>
@@ -60,8 +60,16 @@
 
 <script setup>
 import { ref, computed } from 'vue';
+import { useStore } from 'vuex';
+const store = useStore();
 
-const eventName = ref('');
+const props = defineProps({
+  show: { type: Boolean, required: true },
+});
+
+const eventName = computed(() => {
+  return store.getters.eventName;
+});
 const eventType = ref('');
 const startTime = ref('');
 const endTime = ref('');
@@ -79,12 +87,6 @@ const eventTypeOptions = [
     value: 'absence',
   },
 ];
-
-const props = defineProps({
-  show: { type: Boolean, required: true },
-  eventStart: { type: String, required: false, default: '' },
-  eventEnd: { type: String, required: false, default: '' },
-});
 
 const emit = defineEmits(['close']);
 

@@ -5,8 +5,6 @@
         <NewEventDialog
           @close="toggleDialog"
           :show="dialogOpen"
-          :event-start="newEventStart"
-          :event-end="newEventEnd"
         ></NewEventDialog>
       </div>
     </Teleport>
@@ -33,7 +31,7 @@ import timeGrid from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import luxonPlugin from '@fullcalendar/luxon';
 import { getEvents } from '../../firebase';
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { useStore } from 'vuex';
 import NewEventDialog from './NewEventDialog.vue';
 
@@ -61,9 +59,6 @@ export default {
       response.forEach((event) => events.value.push(event))
     );
 
-    const newEventStart = ref('');
-    const newEventEnd = ref('');
-
     const calendarOptions = {
       plugins: [timeGrid, interactionPlugin, luxonPlugin],
       initialView: 'timeGridWeek',
@@ -79,8 +74,7 @@ export default {
       events: events.value,
       select: function (info) {
         alert('selected ' + info.startStr + ' to ' + info.endStr);
-        newEventStart.value = info.startStr;
-        newEventEnd.value = info.endStr;
+        store.dispatch('setEventName', 'Test');
         dialogOpen.value = true;
       },
       eventClick: function (info) {
@@ -93,8 +87,6 @@ export default {
       events,
       dialogOpen,
       toggleDialog,
-      newEventStart,
-      newEventEnd,
     };
   },
 };
