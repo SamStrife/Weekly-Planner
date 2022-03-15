@@ -5,6 +5,7 @@
         <NewEventDialog
           @close="toggleDialog"
           :show="dialogOpen"
+          :modal-title="modalTitle"
         ></NewEventDialog>
       </div>
     </Teleport>
@@ -31,7 +32,7 @@ import timeGrid from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import luxonPlugin from '@fullcalendar/luxon';
 import { getEvents } from '../../firebase';
-import { ref, watch, computed } from 'vue';
+import { ref, watch } from 'vue';
 import { useStore } from 'vuex';
 import NewEventDialog from './NewEventDialog.vue';
 
@@ -54,6 +55,7 @@ export default {
 
     const dialogOpen = ref(false);
     const toggleDialog = () => (dialogOpen.value = !dialogOpen.value);
+    const modalTitle = ref('');
 
     getEvents().then((response) =>
       response.forEach((event) => events.value.push(event))
@@ -73,12 +75,18 @@ export default {
       selectable: true,
       events: events.value,
       select: function (info) {
-        alert('selected ' + info.startStr + ' to ' + info.endStr);
-        store.dispatch('setEventName', 'Test');
+        store.dispatch('setEventStart', info.startStr);
+        store.dispatch('setEventEnd', info.endStr);
+        modalTitle.value = 'New Event';
         dialogOpen.value = true;
       },
       eventClick: function (info) {
-        alert('Event: ' + info.event.title);
+        store.dispatch('setEventName', info.event.title);
+        store.dispatch('setEventStart', info.event.startStr);
+        store.dispatch('setEventEnd', info.event.endStr);
+        store.dispatch('setEventType', 'Test');
+        modalTitle.value = 'Update Event';
+        dialogOpen.value = true;
       },
     };
     return {
@@ -87,6 +95,7 @@ export default {
       events,
       dialogOpen,
       toggleDialog,
+      modalTitle,
     };
   },
 };

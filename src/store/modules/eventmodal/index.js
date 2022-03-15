@@ -8,6 +8,8 @@ export default {
       eventModalName: '',
       eventModalStart: '',
       eventModalEnd: '',
+      eventModalType: '',
+      eventModalComplete: '',
     };
   },
   mutations,

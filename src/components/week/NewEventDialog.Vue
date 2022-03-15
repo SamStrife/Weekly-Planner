@@ -3,7 +3,7 @@
     <div v-if="show" class="backdrop" @keydown.esc="close" tabindex="0"></div>
     <dialog open v-if="show" @keydown.esc="close" tabindex="0">
       <header>
-        <h2>New Event</h2>
+        <h2>{{ modalTitle }}</h2>
       </header>
       <ui-form class="conditions-form" nowrap action-align="center">
         <ui-grid>
@@ -65,14 +65,16 @@ const store = useStore();
 
 const props = defineProps({
   show: { type: Boolean, required: true },
+  modalTitle: { type: String, required: false, default: 'Event' },
 });
 
-const eventName = computed(() => {
-  return store.getters.eventName;
-});
+const emit = defineEmits(['close']);
+
+const eventName = computed(() => store.getters.eventName);
 const eventType = ref('');
-const startTime = ref('');
-const endTime = ref('');
+const startTime = computed(() => store.getters.eventStart);
+const endTime = computed(() => store.getters.eventEnd);
+
 const eventTypeOptions = [
   {
     label: 'Task',
@@ -88,12 +90,9 @@ const eventTypeOptions = [
   },
 ];
 
-const emit = defineEmits(['close']);
-
 const close = () => {
   emit('close');
 };
-
 const submit = () => {
   console.log(`
   event name: ${eventName.value}
