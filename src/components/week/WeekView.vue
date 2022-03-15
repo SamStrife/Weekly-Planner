@@ -42,6 +42,8 @@ export default {
     const store = useStore();
     const events = ref([]);
 
+    const loggedUser = store.getters.activeUser;
+
     const selectedUser = store.getters.selectedUser;
 
     watch(
@@ -75,10 +77,15 @@ export default {
       selectable: true,
       events: events.value,
       select: function (info) {
-        store.dispatch('setEventStart', info.startStr);
-        store.dispatch('setEventEnd', info.endStr);
-        modalTitle.value = 'New Event';
-        dialogOpen.value = true;
+        console.log(loggedUser);
+        if (!!loggedUser) {
+          store.dispatch('setEventStart', info.startStr);
+          store.dispatch('setEventEnd', info.endStr);
+          modalTitle.value = 'New Event';
+          dialogOpen.value = true;
+        } else {
+          alert('Please Log in to create a new event');
+        }
       },
       eventClick: function (info) {
         store.dispatch('setEventName', info.event.title);

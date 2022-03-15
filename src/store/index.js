@@ -21,8 +21,7 @@ const store = createStore({
       commit('setActiveUser', user);
     },
     logOutUser({ commit }) {
-      const activeUser = null;
-      commit('setActiveUser', activeUser);
+      commit('setActiveUser', null);
       commit('setSelectedUser', null);
     },
     getSelectedUser({ commit }, userID) {
