@@ -96,7 +96,7 @@ const close = () => {
 const submit = () => {
   console.log(`
   event name: ${eventName.value}
-  event type: ${eventType.value}
+  event type: ${eventType.value.value}
   start time: ${startTime.value}
   end time: ${endTime.value}
 
