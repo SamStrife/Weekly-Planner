@@ -14,4 +14,7 @@ export default {
   setEventComplete(state, eventComplete) {
     state.eventModalComplete = eventComplete;
   },
+  setEventID(state, eventID) {
+    state.eventModalID = eventID;
+  },
 };

@@ -14,4 +14,7 @@ export default {
   setEventComplete({ commit }, payload) {
     commit('setEventComplete', payload);
   },
+  setEventID({ commit }, payload) {
+    commit('setEventID', payload);
+  },
 };

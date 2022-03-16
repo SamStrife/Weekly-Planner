@@ -88,6 +88,8 @@ export default {
         }
       },
       eventClick: function (info) {
+        alert(info.event.extendedProps.id);
+        store.dispatch('setEventID', info.event.id);
         store.dispatch('setEventName', info.event.title);
         store.dispatch('setEventStart', info.event.startStr);
         store.dispatch('setEventEnd', info.event.endStr);
