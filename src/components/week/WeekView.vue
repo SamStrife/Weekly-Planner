@@ -53,6 +53,29 @@ export default {
       response.forEach((event) => events.value.push(event))
     );
 
+    function sendDataToModal(type, info) {
+      if (type === 'basic') {
+        if (!!loggedUser.value?.id) {
+          store.dispatch('setEventStart', info.startStr);
+          store.dispatch('setEventEnd', info.endStr);
+          modalTitle.value = 'New Event';
+          dialogOpen.value = true;
+        } else {
+          alert('Please Log in to create a new event');
+        }
+      } else {
+        if (type === 'full') {
+          store.dispatch('setEventID', info.event.extendedProps.ID);
+          store.dispatch('setEventName', info.event.title);
+          store.dispatch('setEventStart', info.event.startStr);
+          store.dispatch('setEventEnd', info.event.endStr);
+          store.dispatch('setEventType', 'Test');
+          modalTitle.value = 'Update Event';
+          dialogOpen.value = true;
+        }
+      }
+    }
+
     const calendarOptions = {
       plugins: [timeGrid, interactionPlugin, luxonPlugin],
       initialView: 'timeGridWeek',
@@ -67,25 +90,13 @@ export default {
       selectable: true,
       events: events.value,
       select: function (info) {
-        if (!!loggedUser.value?.id) {
-          store.dispatch('setEventStart', info.startStr);
-          store.dispatch('setEventEnd', info.endStr);
-          modalTitle.value = 'New Event';
-          dialogOpen.value = true;
-        } else {
-          alert('Please Log in to create a new event');
-        }
+        sendDataToModal('basic', info);
       },
       eventClick: function (info) {
-        store.dispatch('setEventID', info.event.extendedProps.ID);
-        store.dispatch('setEventName', info.event.title);
-        store.dispatch('setEventStart', info.event.startStr);
-        store.dispatch('setEventEnd', info.event.endStr);
-        store.dispatch('setEventType', 'Test');
-        modalTitle.value = 'Update Event';
-        dialogOpen.value = true;
+        sendDataToModal('full', info);
       },
     };
+
     return {
       calendarOptions,
       getEvents,
