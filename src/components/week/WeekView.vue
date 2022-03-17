@@ -32,7 +32,7 @@ import timeGrid from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import luxonPlugin from '@fullcalendar/luxon';
 import { getEvents } from '../../firebase';
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { useStore } from 'vuex';
 import NewEventDialog from './NewEventDialog.vue';
 
@@ -42,18 +42,8 @@ export default {
     const store = useStore();
     const events = ref([]);
 
-    const loggedUser = store.getters.activeUser;
-
-    const selectedUser = store.getters.selectedUser;
-
-    watch(
-      () => store.selectedUser,
-      (user, prevUser) => {
-        if (user !== prevUser) {
-          selectedUser = user;
-        }
-      }
-    );
+    const loggedUser = computed(() => store.getters.activeUser);
+    const selectedUser = computed(() => store.getters.selectedUser);
 
     const dialogOpen = ref(false);
     const toggleDialog = () => (dialogOpen.value = !dialogOpen.value);
@@ -77,8 +67,7 @@ export default {
       selectable: true,
       events: events.value,
       select: function (info) {
-        console.log(loggedUser);
-        if (!!loggedUser) {
+        if (!!loggedUser.value?.id) {
           store.dispatch('setEventStart', info.startStr);
           store.dispatch('setEventEnd', info.endStr);
           modalTitle.value = 'New Event';
