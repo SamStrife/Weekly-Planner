@@ -50,8 +50,15 @@
           </ui-grid-cell>
         </ui-grid>
         <ui-form-field>
-          <base-button @click="submit">Submit</base-button>
-          <base-button @click="close">Cancel</base-button>
+          <base-button @click="submit" v-if="modalButtons == 'full'"
+            >Submit</base-button
+          >
+          <base-button @click="close" v-if="modalButtons == 'full'"
+            >Cancel</base-button
+          >
+          <base-button @click="close" v-if="modalButtons == 'basic'"
+            >Close</base-button
+          >
         </ui-form-field>
       </ui-form>
     </dialog>
@@ -66,6 +73,7 @@ const store = useStore();
 const props = defineProps({
   show: { type: Boolean, required: true },
   modalTitle: { type: String, required: false, default: 'Event' },
+  modalButtons: { type: String, required: false, default: 'basic' },
 });
 
 const emit = defineEmits(['close']);
@@ -92,6 +100,10 @@ const eventTypeOptions = [
 
 const close = () => {
   emit('close');
+  store.dispatch('setEventID', null);
+  store.dispatch('setEventName', null);
+  store.dispatch('setEventStart', null);
+  store.dispatch('setEventEnd', null);
 };
 const submit = () => {
   console.log(`

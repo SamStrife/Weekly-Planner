@@ -6,6 +6,7 @@
           @close="toggleDialog"
           :show="dialogOpen"
           :modal-title="modalTitle"
+          :modal-buttons="modalButtons"
         ></NewEventDialog>
       </div>
     </Teleport>
@@ -48,6 +49,7 @@ export default {
     const dialogOpen = ref(false);
     const toggleDialog = () => (dialogOpen.value = !dialogOpen.value);
     const modalTitle = ref('');
+    const modalButtons = ref('');
 
     getEvents().then((response) =>
       response.forEach((event) => events.value.push(event))
@@ -104,6 +106,7 @@ export default {
       dialogOpen,
       toggleDialog,
       modalTitle,
+      modalButtons,
     };
   },
 };
