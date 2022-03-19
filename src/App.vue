@@ -12,6 +12,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { membersCol } from './firebase';
 
 const store = useStore();
+store.dispatch('getMembers');
 
 onAuthStateChanged(getAuth(), (user) => {
   if (user) {
@@ -27,7 +28,6 @@ onAuthStateChanged(getAuth(), (user) => {
           email: docSnap.data().email,
         });
         store.dispatch('getSelectedUser', uid);
-        console.log(`Selected user: ${uid}`);
       } else {
         console.log('No such document!');
         console.log(`Selected user: ${uid}`);

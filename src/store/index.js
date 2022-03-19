@@ -1,13 +1,11 @@
 import { createStore } from 'vuex';
 
 import MembersModule from './modules/members/index.js';
-import EventsModule from './modules/events/index.js';
 import EventModalModule from './modules/eventmodal/index.js';
 
 const store = createStore({
   modules: {
     members: MembersModule,
-    events: EventsModule,
     eventModal: EventModalModule,
   },
   state() {

@@ -33,7 +33,7 @@ import timeGrid from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import luxonPlugin from '@fullcalendar/luxon';
 import { getEvents } from '../../firebase';
-import { ref, watch, computed } from 'vue';
+import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 import NewEventDialog from './NewEventDialog.vue';
 
@@ -41,21 +41,26 @@ export default {
   components: { FullCalendar, NewEventDialog },
   setup() {
     const store = useStore();
-    const events = ref([]);
 
     const loggedUser = computed(() => store.getters.activeUser);
     const selectedUser = computed(() => store.getters.selectedUser);
+    console.log(`Week View - Selected User: ${selectedUser.value}`);
 
+    //INFO: Events
+    const events = [];
+
+    getEvents().then((response) =>
+      response.forEach((event) => events.push(event))
+    );
+
+    //INFO:Modal Stuff
     const dialogOpen = ref(false);
     const toggleDialog = () => (dialogOpen.value = !dialogOpen.value);
     const modalTitle = ref('');
     const modalButtons = ref('');
 
-    getEvents().then((response) =>
-      response.forEach((event) => events.value.push(event))
-    );
-
     function sendDataToModal(type, info) {
+      modalButtons.value = type;
       if (type === 'basic') {
         if (!!loggedUser.value?.id) {
           store.dispatch('setEventStart', info.startStr);
@@ -78,6 +83,7 @@ export default {
       }
     }
 
+    //INFO: Calendar
     const calendarOptions = {
       plugins: [timeGrid, interactionPlugin, luxonPlugin],
       initialView: 'timeGridWeek',
@@ -90,7 +96,7 @@ export default {
       editable: true,
       eventStartEditable: true,
       selectable: true,
-      events: events.value,
+      events: events,
       select: function (info) {
         sendDataToModal('basic', info);
       },

@@ -20,9 +20,7 @@ import { useStore } from 'vuex';
 import { computed } from 'vue';
 
 const store = useStore();
-store.dispatch('getMembers');
 const members = computed(() => store.getters.members);
-
 const selectedUser = computed(() => store.getters.selectedUser);
 
 function selectUser(id) {

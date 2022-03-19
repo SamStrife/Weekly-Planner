@@ -49,16 +49,12 @@
             </ui-form-field>
           </ui-grid-cell>
         </ui-grid>
-        <ui-form-field>
-          <base-button @click="submit" v-if="modalButtons == 'full'"
-            >Submit</base-button
-          >
-          <base-button @click="close" v-if="modalButtons == 'full'"
-            >Cancel</base-button
-          >
-          <base-button @click="close" v-if="modalButtons == 'basic'"
-            >Close</base-button
-          >
+        <ui-form-field v-if="props.modalButtons === 'full'">
+          <base-button @click="submit">Submit</base-button>
+          <base-button @click="close">Cancel</base-button>
+        </ui-form-field>
+        <ui-form-field v-else-if="props.modalButtons === 'basic'">
+          <base-button @click="close">Close</base-button>
         </ui-form-field>
       </ui-form>
     </dialog>
